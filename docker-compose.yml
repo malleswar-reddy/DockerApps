@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  oracle-db:
+    image: container-registry.oracle.com/database/express:latest
+    container_name: oracle_db
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    environment:
+      - ORACLE_PWD=password
+    # - ORACLE_SID=OraDoc
+      - DB_DOMAIN=dockerhost
+    volumes:
+      - ./scripts:/app/scripts
+      - ./dataset:/app/dataset
+    # depends_on:
+    #   oracle-db:
+    #     condition: service_healthy
+    # command: ["sh", "/app/scripts/script.sh"]
+    healthcheck:
+      test: ["CMD", "sqlplus", "-S", "SYSTEM/password@XE", "<<", "'exit;'"]
+      interval: 30s
+      retries: 5
+      start_period: 60s
+    networks:
+      - oracle_network
+    # labels:
+      # "logs" : "/opt/oracle/[*.xml,*.log] /logs[*log]"
+
+volumes:
+  oracle_data:
+
+networks:
+  oracle_network:
+    driver: bridge
+
+
+
+
+# docker-compose -f docker-compose.yml up -d --force-recreate
