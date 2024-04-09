@@ -111,6 +111,81 @@ SELECT 98, 'Dylan Lee', 'HR' FROM dual UNION ALL
 SELECT 99, 'Emily Carter', 'IT' FROM dual UNION ALL
 SELECT 100, 'Brandon Turner', 'Finance' FROM dual;
 
+
+
+ALTER TABLE Employee
+ADD Salary DECIMAL(10, 2); -- Assuming salary is stored as a decimal number
+
+UPDATE Employee
+SET Salary = ROUND(DBMS_RANDOM.VALUE(30000, 100000)) -- Generates a random salary between 30000 and 100000
+WHERE EmpID <= 100; -- Assuming you want to update the first 100 records
+
+
+
+-- Add the GENDER column to the Employee table
+ALTER TABLE Employee
+ADD GENDER VARCHAR(10);
+
+-- Update the GENDER column with random data
+UPDATE Employee
+SET GENDER = CASE WHEN MOD(EmpID, 2) = 0 THEN 'Male' ELSE 'Female' END;
+
+
+
+-- Step 1: Create the Address Table
+CREATE TABLE Address (
+    AddressID INT PRIMARY KEY,
+    EmployeeID INT,
+    Street VARCHAR(255),
+    City VARCHAR(100),
+    State VARCHAR(100),
+    PostalCode VARCHAR(20),
+    Country VARCHAR(100),
+    CONSTRAINT FK_EmployeeID FOREIGN KEY (EmployeeID) REFERENCES Employee(EmpID)
+);
+
+-- Step 2: Add Foreign Key Constraint
+ALTER TABLE Address
+ADD CONSTRAINT FK_EmployeeID FOREIGN KEY (EmployeeID) REFERENCES Employee(EmpID);
+
+
+
+BEGIN
+    FOR i IN 1..100 LOOP
+        
+        INSERT INTO Address (AddressID, EmployeeID, Street, City, State, PostalCode, Country)
+        VALUES (i, i, 'Street ' || i, 'City ' || i, 'State ' || i, 'PostalCode ' || i, 'Country ' || i);
+    END LOOP;
+    COMMIT;
+END;
+
+
+CREATE OR REPLACE PROCEDURE update_city_by_state IS
+BEGIN
+    FOR i IN 1..100 LOOP
+        UPDATE Address
+        SET City = CASE 
+                        WHEN State = 'Telangana' THEN 'Hyderabad'
+                        WHEN State = 'Karnataka' THEN 'Bengaluru'
+                        WHEN State = 'Andhra Pradesh' THEN 
+                            CASE WHEN City IS NULL THEN 'Amaravati' ELSE City END
+                        WHEN State = 'Delhi' THEN 'Delhi'
+                   END
+        WHERE AddressID = i;
+    END LOOP;
+END update_city_by_state;
+/
+
+
+
+BEGIN
+    update_city_by_state;
+END;
+/
+
+
+
+
 COMMIT;
 
 

@@ -19,6 +19,37 @@ GROUP BY c.customer_id, c.name;
 
 
 
-SELECT DEPT, COUNT(*) as dept_no FROM Employee GROUP BY DEPT;
+SELECT DEPT, COUNT(*) as dept_no FROM Employee GROUP BY DEPT HAVING COUNT(*) > 2 ;
+
+
 
 SELECT COUNT(*) FROM (SELECT DISTINCT(EmpName) FROM EMPloyee);
+
+SELECT * FROM Employee;
+
+
+ -- My Stuff 
+
+
+ALTER TABLE Employee
+ADD Salary DECIMAL(10, 2); -- Assuming salary is stored as a decimal number
+
+UPDATE Employee
+SET Salary = ROUND(DBMS_RANDOM.VALUE(30000, 100000)) -- Generates a random salary between 30000 and 100000
+WHERE EmpID <= 100; -- Assuming you want to update the first 100 records
+
+COMMIT;
+
+
+SELECT * FROM ADDRESS WHERE STATE LIKE 'State%';
+
+UPDATE address SET city = 'Amaravati' where State = 'andhra pradesh';
+
+
+
+SELECT A.STATE,E.GENDER,COUNT(E.EMPID) AS EMPCOUNT FROM EMPLOYEE E  JOIN ADDRESS A ON E.EMPID = A.EMPLOYEEID GROUP BY E.GENDER,A.STATE;
+
+
+
+
+

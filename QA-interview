@@ -1,0 +1,33 @@
+
+
+
+
+
+
+
+
+
+SELECT DEPT, count(*) as No from	 EMpoyee where Groupby DEPT ;
+
+
+
+customer_id	first_name	last_name	age	country
+1			John	Doe				31	USA
+2			Robert	Luna			22	USA
+3			David	Robinson		22	UK
+4			John	Reinhardt		25	UK
+5			Betty	Doe				28	UAE
+
+
+Orders
+order_id	item	amount	customer_id
+1		Keyboard	400		4
+2		Mouse		300		4
+3		Monitor		12000	3
+4		Keyboard	400		1
+5		Mousepad	250		2
+ 
+
+ select * from Customer c join  Orders or on   c.customer_id = or.customer_id where Groupby(customer_id)
+
+
