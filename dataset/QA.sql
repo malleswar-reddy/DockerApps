@@ -50,6 +50,27 @@ UPDATE address SET city = 'Amaravati' where State = 'andhra pradesh';
 SELECT A.STATE,E.GENDER,COUNT(E.EMPID) AS EMPCOUNT FROM EMPLOYEE E  JOIN ADDRESS A ON E.EMPID = A.EMPLOYEEID GROUP BY E.GENDER,A.STATE;
 
 
+-- column using a CASE expression
+
+SELECT emp.*,
+       CASE
+           WHEN Age >= 18 THEN 'Adult'
+           ELSE 'Not Adult'
+       END AS adult_status
+FROM Employee emp;
+
+
+SELECT empid,empname,employee.salary, DENSE_RANK() OVER (ORDER BY Salary DESC) AS SalaryRank
+    FROM Employee;
+    
+
+SELECT *
+FROM (
+    SELECT empid,empname,employee.salary, DENSE_RANK() OVER (ORDER BY Salary DESC) AS SalaryRank
+    FROM Employee
+) ranked_employees
+WHERE SalaryRank = 4;
+
 
 
 

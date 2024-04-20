@@ -184,9 +184,16 @@ END;
 /
 
 
+-- Step 1: Add the Age column to the Employee table
+ALTER TABLE Employee
+ADD Age INT;
 
-
+-- Step 2: Update the Age column with random data
+UPDATE Employee
+SET Age = ROUND(DBMS_RANDOM.VALUE(10, 60));
 COMMIT;
+
+SELECT  * FROM Employee;
 
 
 

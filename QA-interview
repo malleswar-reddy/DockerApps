@@ -7,6 +7,60 @@
 
 
 
+
+
+
+
+
+print name of all EMPLOYEES staying in bangalore city using java 8
+
+
+List<String> empnames =  emplist.stream().filter(e -> e.getCity().Equals("Bangalore")).map(Empyee::getName).collect(Collect.toList())
+
+
+2) Print frequncy of characters
+ 
+input: {a,a,b,a,c,c,c}
+ 
+output: 
+a=3
+b=1
+c=3
+
+map<String,Interger> frequncyChrater=Arrays.aslist({a,a,b,a,c,c,c}).stream().mapTOobj(c -> c+" ")
+								.collect(collectors.GroupBy(funcation.idenity(),Collectors.sum(c-> 1));
+
+
+
+
+Class Parent{
+	
+	public Object m1(){
+		Sop("Parent m1");
+	}
+}
+
+
+Class child extends Parent {
+	
+	@Override
+	public String m1() throw Exception {
+		Sop("Child m1");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 SELECT DEPT, count(*) as No from	 EMpoyee where Groupby DEPT ;
 
 
