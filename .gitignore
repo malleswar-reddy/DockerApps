@@ -1,0 +1,8 @@
+# Default ignored files
+/shelf/
+/.idea/*
+
+/DockerApps.iml
+/ArunStuff/KafkaTodo/kafka/kafka-logs/*
+/ArunStuff/KafkaTodo/zookeeper-logs/*
+/jarRepositories.xml
